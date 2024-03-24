@@ -10,6 +10,7 @@ declare interface FunctionContextRequest {
   query: Record<string, string>
   headers: Record<string, string>
   params: Record<string, string>
+  method: string
 }
 
 declare interface FastifyRequest extends FunctionContextRequest {
@@ -27,12 +28,14 @@ declare interface ServiceGetter {
   }
 }
 
-
-declare interface Context extends FunctionContextRequest, FunctionContextResponse, ServiceGetter {
+declare interface Context
+  extends FunctionContextRequest,
+    FunctionContextResponse,
+    ServiceGetter {
   req: FunctionContextRequest & FastifyRequest
   res: FunctionContextResponse
- 
 
+  isAuthenticated: boolean
   model: SnippetModel
   document: SnippetModel & { [key: string]: any }
   getMaster: () => Promise<UserModel>
