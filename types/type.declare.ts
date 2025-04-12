@@ -69,7 +69,7 @@ declare interface IStorage {
      * value 自动反序列化，JSON.Parse
      * @param key
      */
-    get(key: string): Promise<string | object>
+    get<T>(key: string): Promise<T>
 
     set(key: string, value: string | object, ttl?: number): Promise<string>
     del(key: string): Promise<string>
